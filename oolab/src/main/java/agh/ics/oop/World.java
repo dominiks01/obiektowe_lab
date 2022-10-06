@@ -13,21 +13,13 @@ public class World {
         int i = 0;
 
         for(String argument: args){
-            switch (argument){
-                case "f":
-                    result_array[i++] = Directions.FORWARD;
-                    break;
-                case "b":
-                    result_array[i++] = Directions.BACKWARD;
-                    break;
-                case "l":
-                    result_array[i++] = Directions.LEFT;
-                    break;
-                case "r":
-                    result_array[i++] = Directions.RIGHT;
-                    break;
-                default:
-                    break;
+            switch (argument) {
+                case "f" -> result_array[i++] = Directions.FORWARD;
+                case "b" -> result_array[i++] = Directions.BACKWARD;
+                case "l" -> result_array[i++] = Directions.LEFT;
+                case "r" -> result_array[i++] = Directions.RIGHT;
+                default -> {
+                }
             }
         }
         return result_array;
