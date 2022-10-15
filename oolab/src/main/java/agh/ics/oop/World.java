@@ -4,7 +4,7 @@ public class World {
     public static void main(String[] args){
         System.out.print("Start\n");
         run(string_to_enum(args));
-        System.out.print("Stop");
+        System.out.print("Stop\n");
     }
 
     public static Directions[] string_to_enum(String[]args){
