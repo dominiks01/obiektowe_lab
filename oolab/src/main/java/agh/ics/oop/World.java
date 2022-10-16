@@ -1,5 +1,7 @@
 package agh.ics.oop;
 
+import java.util.Arrays;
+
 public class World {
     public static void main(String[] args){
         System.out.print("Start\n");
@@ -22,7 +24,7 @@ public class World {
                 }
             }
         }
-        return result_array;
+        return Arrays.copyOfRange(result_array, 0, i);
     }
     private static void run(Directions[] direction_array) {
         for(Directions argument: direction_array) {
