@@ -1,5 +1,9 @@
 package agh.ics.oop;
 
+import com.google.common.hash.HashCode;
+
+import java.util.Objects;
+
 public class Vector2d {
     public final int x, y;
 
@@ -46,5 +50,14 @@ public class Vector2d {
         if(!(other instanceof Vector2d that))
             return false;
         return that.x == this.x && that.y == this.y;
+    }
+
+    @Override
+    public int hashCode() {
+        final int p = 7;
+        int result = p + Integer.hashCode(this.x);
+        int temp;
+        temp = Integer.hashCode(this.y);
+        return p*result + (int)(temp ^ (temp >>>10));
     }
 }

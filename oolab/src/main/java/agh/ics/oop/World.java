@@ -4,9 +4,18 @@ import java.util.Arrays;
 
 public class World {
     public static void main(String[] args){
-        System.out.print("Start\n");
-        run(string_to_enum(args));
-        System.out.print("Stop\n");
+//        Animal kot = new Animal();
+//        System.out.println(kot.toString());
+//
+//        OptionsParser parseArgs = new OptionsParser(args);
+//
+//        for(MoveDirection mv : parseArgs.parsedString){
+//            kot.move(mv);
+//            System.out.println(kot.toString());
+//        }
+
+        MoveDirection [] result_array = OptionsParser.parse(args);
+
     }
 
     public static Directions[] string_to_enum(String[]args){
