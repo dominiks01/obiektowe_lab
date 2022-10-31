@@ -1,18 +1,16 @@
 package agh.ics.oop;
 
 import org.junit.jupiter.api.Assertions;
-import org.junit.jupiter.api.BeforeAll;
 import org.junit.jupiter.api.Test;
-import org.testng.annotations.BeforeTest;
+import org.testng.Assert;
 
 import java.util.Objects;
 
-import static org.junit.jupiter.api.Assertions.assertEquals;
 import static org.junit.jupiter.api.Assertions.assertTrue;
 
 public class AnimalTest {
-
-    @Test @BeforeTest
+    Vector2d startingPosition = new Vector2d(2,2);
+    @Test
     public void optionsParserEquals(){
         String[][] testingString = {
                 {"r", "b",".....", "b", "--", "b"},
@@ -29,36 +27,32 @@ public class AnimalTest {
         };
 
         Assertions.assertAll(
-                ()->assertTrue(Objects.deepEquals(expected[0], OptionsParser.parse(testingString[0]))),
-                ()->assertTrue(Objects.deepEquals(expected[1], OptionsParser.parse(testingString[1]))),
-                ()->assertTrue(Objects.deepEquals(expected[2], OptionsParser.parse(testingString[2]))),
-                ()->assertTrue(Objects.deepEquals(expected[3], OptionsParser.parse(testingString[3])))
+                ()->assertTrue(Objects.deepEquals(expected[0], new OptionsParser().parse(testingString[0]))),
+                ()->assertTrue(Objects.deepEquals(expected[1], new OptionsParser().parse(testingString[1]))),
+                ()->assertTrue(Objects.deepEquals(expected[2], new OptionsParser().parse(testingString[2]))),
+                ()->assertTrue(Objects.deepEquals(expected[3], new OptionsParser().parse(testingString[3])))
         );
 
     }
 
     @Test
-    public void orientationTest(){
-        Animal testingAnimal = new Animal();
-        Vector2d startingPosition = new Vector2d(2,2);
-        MapDirection startingOrientation = MapDirection.NORTH;
+    public void toStringFalse(){
+        Animal animal01 = new Animal(null, startingPosition);
+        Animal animal02 = new Animal(null, startingPosition);
+        animal02.move(MoveDirection.FORWARD);
 
-        assertEquals(startingPosition.toString()+" "+startingOrientation.toString(),testingAnimal.toString());
-
-        testingAnimal.move(MoveDirection.RIGHT);
-        assertEquals(startingPosition.toString()+" "+MapDirection.EAST.toString(),testingAnimal.toString());
-
-        testingAnimal.move(MoveDirection.RIGHT);
-        assertEquals(startingPosition.toString()+" "+MapDirection.SOUTH.toString(),testingAnimal.toString());
-
+        Assert.assertNotEquals(animal01.toString(), "(2,2) North");
+        Assert.assertNotEquals(animal01.toString(), "Północ (2,2) ");
+        Assert.assertNotEquals(animal01.toString(), "(3,2) Południe");
+        Assert.assertNotEquals(animal01.toString(), "(2,2) Wschód");
     }
 
     @Test
     public void positionShouldBeTrue(){
         String[][] testing_pos = {
-                {"r", "b", "b", "WrongOne", "left", "forward", "f"},
-                {"f", "back", "f", "cała naprzód!", "f", "f"},
-                {"b", "b", ":DDDD", "f", "forward"},
+                {"r", "b", "b", "Wrong", "left", "forward", "f"},
+                {"f", "back", "f", "całanaprzód", "f", "f"},
+                {"b", "b", "DDDD", "f", "forward"},
                 {"r", "r", "l", "r"}};
 
         Vector2d[] expectedPosition = {
@@ -69,14 +63,14 @@ public class AnimalTest {
         };
 
         Animal[] testAnimals = {
-            new Animal(),
-            new Animal(),
-            new Animal(),
-            new Animal()
+            new Animal(null, startingPosition),
+            new Animal(null, startingPosition),
+            new Animal(null, startingPosition),
+            new Animal(null, startingPosition)
         };
 
         for(int i = 0; i < 4; ++i){
-            for(MoveDirection mv:OptionsParser.parse(testing_pos[i])){
+            for(MoveDirection mv: new OptionsParser().parse(testing_pos[i])){
                 testAnimals[i].move(mv);
             }
         }
@@ -91,9 +85,9 @@ public class AnimalTest {
 
     @Test
     public void testBordersTrue() {
-        Animal animal_01 = new Animal();
-        Animal animal_02 = new Animal();
-        Animal animal_03 = new Animal();
+        Animal animal_01 = new Animal(null, startingPosition);
+        Animal animal_02 = new Animal(null, startingPosition);
+        Animal animal_03 = new Animal(null, startingPosition);
 
         Vector2d topRight = new Vector2d(4, 4);
         Vector2d bottomLeft = new Vector2d(0, 0);

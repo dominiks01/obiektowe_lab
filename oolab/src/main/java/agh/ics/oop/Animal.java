@@ -1,47 +1,67 @@
 package agh.ics.oop;
 
 public class Animal {
-
     private MapDirection orientation;
     private Vector2d position;
+    public IWorldMap map;
 
-    public Animal(){
-        orientation = MapDirection.NORTH;
-        position = new Vector2d(2,2);
+    public Animal(IWorldMap map, Vector2d initialPosition){
+        this.orientation = MapDirection.NORTH;
+        this.position = initialPosition;
+        this.map = map;
+    }
+
+    public Animal(IWorldMap map){
+        this.orientation = MapDirection.NORTH;
+        this.position = new Vector2d(2,2);
+        this.map = map;
+    }
+
+    public Vector2d getPosition(){
+        return this.position;
     }
 
     public String toString(){
-        return position.toString()+" "+ orientation.toString();
+        return switch (this.orientation){
+            case NORTH -> "N";
+            case EAST ->  "E";
+            case SOUTH -> "S";
+            case WEST -> "W";
+        };
     }
 
     public boolean isAt(Vector2d position){
         return position.equals(this.position);
     }
 
-    private boolean isValidMove(MoveDirection direction){
+    /*private void makeValidMove(MoveDirection direction){
 
-        Vector2d actual_position = this.position;
-        Vector2d topRightBorder = new Vector2d(4,4);
-        Vector2d bottomLeftBorder = new Vector2d(0, 0);
+        Vector2d actualPosition = this.position;
 
-        actual_position = switch (direction){
-            case FORWARD -> actual_position.add(this.orientation.toUnitVector());
-            case BACKWARD -> actual_position.subtract(this.orientation.toUnitVector());
-            default -> actual_position;
+        switch (direction){
+            case FORWARD -> actualPosition = actualPosition.add(this.orientation.toUnitVector());
+            case BACKWARD -> actualPosition =  actualPosition.subtract(this.orientation.toUnitVector());
+            case RIGHT -> this.orientation = this.orientation.next();
+            case LEFT -> this.orientation = this.orientation.previous();
         };
 
-        return actual_position.follows(bottomLeftBorder) && actual_position.precedes(topRightBorder);
-
+        if (actualPosition.follows() && actualPosition.precedes(topRightBorder)){
+            this.position = actualPosition;
+        };
     }
-
+*/
     public void move(MoveDirection direction){
-        if (isValidMove(direction)) {
-            switch (direction) {
-                case RIGHT -> this.orientation = this.orientation.next();
-                case LEFT -> this.orientation = this.orientation.previous();
-                case FORWARD -> this.position = this.position.add(this.orientation.toUnitVector());
-                case BACKWARD ->this.position = this.position.subtract(this.orientation.toUnitVector());
+        if(direction.equals(MoveDirection.FORWARD) || direction.equals(MoveDirection.BACKWARD)){
+
+            if(map.canMoveTo(this.position.add(this.orientation.toUnitVector()))){
+                this.position = (direction.equals(MoveDirection.FORWARD))?
+                        this.position.add(this.orientation.toUnitVector()):
+                        this.position.subtract(this.orientation.toUnitVector());
             }
+        } else {
+            this.orientation = (direction.equals(MoveDirection.LEFT))?
+                    this.orientation.previous():
+                    this.orientation.next();
         }
     }
 }

@@ -1,10 +1,9 @@
 package agh.ics.oop;
 
-import java.lang.reflect.Array;
 import java.util.Arrays;
 
 public class OptionsParser {
-    public static MoveDirection[] parse(String[] stringToDirection){
+    public MoveDirection[] parse(String[] stringToDirection){
         MoveDirection[] resultArray = new MoveDirection[stringToDirection.length];
         int i = 0;
 
