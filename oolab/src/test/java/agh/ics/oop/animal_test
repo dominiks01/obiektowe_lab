@@ -1,16 +1,4 @@
-package agh.ics.oop;
-
-import org.junit.jupiter.api.Assertions;
-import org.junit.jupiter.api.Test;
-import org.testng.Assert;
-
-import java.util.List;
-import java.util.Objects;
-
-import static org.junit.jupiter.api.Assertions.*;
-
-public class AnimalTest {
-    @Test
+@Test
    public void mapAnimalsEngine(){
        IWorldMap map = new RectangularMap(10, 10);
 
@@ -39,6 +27,3 @@ public class AnimalTest {
                                 ()-> assertEquals(animals[2], map.objectAt(expectedPosition[2])),
                                 ()-> assertEquals(animals[3], map.objectAt(expectedPosition[3]))
        );
-
-   }
-}

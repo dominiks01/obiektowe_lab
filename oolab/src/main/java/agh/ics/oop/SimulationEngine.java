@@ -10,8 +10,10 @@ public class SimulationEngine implements IEngine{
         this.moves = moves;
         this.map = (RectangularMap) map;
 
-        for(Vector2d start: startingPositions){
-            map.place(new Animal(map, start));
+        if(startingPositions != null) {
+            for (Vector2d start : startingPositions) {
+                map.place(new Animal(map, start));
+            }
         }
     }
 

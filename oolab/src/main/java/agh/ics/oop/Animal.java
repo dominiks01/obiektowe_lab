@@ -34,22 +34,6 @@ public class Animal {
         return position.equals(this.position);
     }
 
-    /*private void makeValidMove(MoveDirection direction){
-
-        Vector2d actualPosition = this.position;
-
-        switch (direction){
-            case FORWARD -> actualPosition = actualPosition.add(this.orientation.toUnitVector());
-            case BACKWARD -> actualPosition =  actualPosition.subtract(this.orientation.toUnitVector());
-            case RIGHT -> this.orientation = this.orientation.next();
-            case LEFT -> this.orientation = this.orientation.previous();
-        };
-
-        if (actualPosition.follows() && actualPosition.precedes(topRightBorder)){
-            this.position = actualPosition;
-        };
-    }
-*/
     public void move(MoveDirection direction){
         if(direction.equals(MoveDirection.FORWARD) || direction.equals(MoveDirection.BACKWARD)){
 
