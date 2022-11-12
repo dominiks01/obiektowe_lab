@@ -1,7 +1,11 @@
 package agh.ics.oop;
 
+import java.util.ArrayList;
+import java.util.List;
+
 public class SimulationEngine implements IEngine{
 
+    private List<Animal> animals = new ArrayList<>();
     private final MoveDirection[] moves;
     private final RectangularMap map;
 
@@ -12,7 +16,7 @@ public class SimulationEngine implements IEngine{
 
         if(startingPositions != null) {
             for (Vector2d start : startingPositions) {
-                map.place(new Animal(map, start));
+                animals.add(new Animal((map), start));
             }
         }
     }
@@ -21,7 +25,8 @@ public class SimulationEngine implements IEngine{
     public void run() {
         int i = 0;
         for(MoveDirection mv : this.moves){
-           map.animals.get(i++%(map.animals.size())).move(mv);
+            //map.animals.get(i++%(map.animals.size())).move(mv);
+            animals.get(i++%(animals.size())).move(mv);
         }
     }
 }

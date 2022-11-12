@@ -14,6 +14,11 @@ public class MapTest {
     public void mapAnimalsEngine(){
         IWorldMap map = new RectangularMap(10, 10);
 
+        Vector2d[] startingPosition = {  new Vector2d(2,9),
+                new Vector2d(2,3),
+                new Vector2d(8,9),
+                new Vector2d(5,6)};
+
         Vector2d[] expectedPosition = {  new Vector2d(2,6),
                 new Vector2d(4,5),
                 new Vector2d(8,4),
@@ -31,7 +36,7 @@ public class MapTest {
         for(Animal animal: animals)
             map.place(animal);
 
-        IEngine testEngine = new SimulationEngine(directions, map, null);
+        IEngine testEngine = new SimulationEngine(directions, map, startingPosition);
         testEngine.run();
 
         Assertions.assertAll(    ()-> assertEquals(animals[0], map.objectAt(expectedPosition[0])),

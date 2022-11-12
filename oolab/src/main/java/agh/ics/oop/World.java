@@ -10,7 +10,9 @@ public class World {
         engine.run();
 
         MapVisualizer visual = new MapVisualizer(map);
-        System.out.println(visual.draw(new Vector2d(0,0), new Vector2d(5,10)));
+        //System.out.println(visual.draw(new Vector2d(0,0), new Vector2d(5,10)));
+
+        System.out.println(map.toString());
     }
 
     public static Directions[] string_to_enum(String[]args){
