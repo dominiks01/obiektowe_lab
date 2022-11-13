@@ -1,27 +1,19 @@
 package agh.ics.oop;
 
-public class Animal {
+public class Animal extends IMapElement{
     private MapDirection orientation;
-    private Vector2d position;
     private IWorldMap map;
 
     public Animal(IWorldMap map, Vector2d initialPosition){
+        super(initialPosition);
         this.orientation = MapDirection.NORTH;
-        this.position = initialPosition;
         this.map = map;
     }
 
     public Animal(IWorldMap map){
-//        this.orientation = MapDirection.NORTH;
-//        this.position = new Vector2d(2,2);
-//        this.map = map;
-
         this(map, new Vector2d(2,2));
     }
 
-    public Vector2d getPosition(){
-        return this.position;
-    }
 
     public String toString(){
         return switch (this.orientation){
@@ -32,18 +24,22 @@ public class Animal {
         };
     }
 
-    public boolean isAt(Vector2d position){
-        return position.equals(this.position);
+    public MapDirection getOrientation(){
+        return this.orientation;
     }
 
     public void move(MoveDirection direction){
         if(direction.equals(MoveDirection.FORWARD) || direction.equals(MoveDirection.BACKWARD)){
 
-            if(map.canMoveTo(this.position.add(this.orientation.toUnitVector()))){
-                this.position = (direction.equals(MoveDirection.FORWARD))?
-                        this.position.add(this.orientation.toUnitVector()):
-                        this.position.subtract(this.orientation.toUnitVector());
+            Vector2d newPosition = super.position;
+
+            if(map.canMoveTo(newPosition.add(this.orientation.toUnitVector()))){
+                newPosition = (direction.equals(MoveDirection.FORWARD))?
+                        newPosition.add(this.orientation.toUnitVector()):
+                        newPosition.subtract(this.orientation.toUnitVector());
             }
+
+            super.position = newPosition;
         } else {
             this.orientation = (direction.equals(MoveDirection.LEFT))?
                     this.orientation.previous():

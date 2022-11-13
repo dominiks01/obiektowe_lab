@@ -4,19 +4,32 @@ import java.util.ArrayList;
 import java.util.List;
 
 public class SimulationEngine implements IEngine{
-
-    private List<Animal> animals = new ArrayList<>();
+    private final List<Animal> animals = new ArrayList<>();
     private final MoveDirection[] moves;
-    private final RectangularMap map;
+    private boolean checkAnimal(Animal checkAnimal){
+
+        for(Animal i: animals){
+            if(i.equals(checkAnimal)){
+                return true;
+            }
+        }
+
+        return false;
+    }
 
     public SimulationEngine(MoveDirection[] moves, IWorldMap map, Vector2d[] startingPositions){
 
         this.moves = moves;
-        this.map = (RectangularMap) map;
 
         if(startingPositions != null) {
             for (Vector2d start : startingPositions) {
-                animals.add(new Animal((map), start));
+                if(map.canMoveTo(start)) {
+                    Animal new_a = new Animal(map, start);
+                    animals.add(new_a);
+                    map.place(new_a);
+                } else if(!checkAnimal((Animal) map.objectAt(start))){
+                    animals.add((Animal) map.objectAt(start));
+                }
             }
         }
     }
@@ -25,7 +38,6 @@ public class SimulationEngine implements IEngine{
     public void run() {
         int i = 0;
         for(MoveDirection mv : this.moves){
-            //map.animals.get(i++%(map.animals.size())).move(mv);
             animals.get(i++%(animals.size())).move(mv);
         }
     }
