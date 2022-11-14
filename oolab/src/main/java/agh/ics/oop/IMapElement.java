@@ -1,6 +1,9 @@
 package agh.ics.oop;
 
-abstract public class IMapElement {
+import java.util.List;
+import java.util.Objects;
+
+abstract public class IMapElement implements IPositionChangeObserver{
     protected Vector2d position;
 
     public IMapElement(Vector2d initialPosition) {
@@ -16,5 +19,10 @@ abstract public class IMapElement {
     }
 
     abstract public String toString();
+
+    @Override
+    public int hashCode() {
+        return Objects.hash(this.getPosition());
+    }
 
 }

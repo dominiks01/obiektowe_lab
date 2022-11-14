@@ -6,6 +6,9 @@ import java.util.List;
 public class SimulationEngine implements IEngine{
     private final List<Animal> animals = new ArrayList<>();
     private final MoveDirection[] moves;
+
+    private IWorldMap map;
+
     private boolean checkAnimal(Animal checkAnimal){
 
         for(Animal i: animals){
@@ -13,7 +16,6 @@ public class SimulationEngine implements IEngine{
                 return true;
             }
         }
-
         return false;
     }
 

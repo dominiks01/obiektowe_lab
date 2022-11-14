@@ -1,70 +1,68 @@
 package agh.ics.oop;
 
-import java.util.ArrayList;
-import java.util.List;
 import java.util.Random;
 
 public class GrassField extends AbstractWorldMap{
 
-//    private List<Grass> grass = new ArrayList<>();
-    private final MapVisualizer mv = new MapVisualizer(this);
+    int numberOfGrasses;
 
+    private Vector2d getRandomVector(int n){
+        return new Vector2d((int)(Math.random()*(Math.sqrt(10*n)+1)),
+                (int)(Math.random()*(Math.sqrt(10*n)+1)));
+    }
 
     GrassField(int numberOfGrasses){
-        super(0, 0);
+        this.numberOfGrasses = numberOfGrasses;
         Random random = new Random();
 
         for(int i = 0; i < numberOfGrasses; ++i){
 
-            Vector2d newPosition = new Vector2d((int)(Math.random()*(Math.sqrt(10*numberOfGrasses)+1)),
-                                                (int)(Math.random()*(Math.sqrt(10*numberOfGrasses)+1)));
+            Vector2d newPosition = getRandomVector(numberOfGrasses+1);
 
-            while (!canMoveTo(newPosition)){
-               newPosition = new Vector2d((int)(Math.random()*(Math.sqrt(10*numberOfGrasses)+1)),
-                        (int)(Math.random()*(Math.sqrt(10*numberOfGrasses)+1)));
+            while (objects.containsKey(newPosition)){
+               newPosition = getRandomVector(numberOfGrasses+1);
             }
 
-            super.objects.add(new Grass(newPosition));
+            super.objects.put(newPosition, new Grass(newPosition));
         }
     }
 
     @Override
     public boolean canMoveTo(Vector2d position) {
-        return !isOccupied(position) || objectAt(position) instanceof Grass;
-    }
+        if(objectAt(position) instanceof Grass){
 
+            Vector2d newPosition = getRandomVector(numberOfGrasses+1);
 
-    @Override
-    public Object objectAt(Vector2d position) {
-        for(Animal actualAnimal : animals){
-            if(position.equals(actualAnimal.getPosition())){
-                return actualAnimal;
+            while (!canMoveTo(newPosition) || position.equals(newPosition)){
+                newPosition = getRandomVector(numberOfGrasses+1);
             }
-        }
 
-        for(IMapElement grassObject : super.objects){
-            if(position.equals(grassObject.getPosition())){
-                return grassObject;
-            }
-        }
-        return null;
-    }
+            super.objects.remove(objectAt(position));
+            super.objects.put(newPosition, new Grass(newPosition));
 
-    public String toString(){
+        }
+        return !isOccupied(position);
+    };
+
+
+    public Vector2d getBottomLeft(){
         Vector2d bottomLeft = new Vector2d(0,0);
+
+        for(IMapElement i : super.objects.values()){
+            bottomLeft = bottomLeft.lowerLeft(i.getPosition());
+        }
+
+        return bottomLeft;
+    }
+
+    public Vector2d getTopRight(){
         Vector2d topRight = new Vector2d(0,0);
 
-        for(Animal i: animals){
+        for(IMapElement i : super.objects.values()){
             topRight = topRight.upperRight(i.getPosition());
-            bottomLeft = bottomLeft.lowerLeft(i.getPosition());
         }
 
-        for(IMapElement i: super.objects){
-            topRight = topRight.upperRight(i.getPosition());
-            bottomLeft = bottomLeft.lowerLeft(i.getPosition());
-        }
-
-        return mv.draw(bottomLeft, topRight);
+        return topRight;
     }
 
 }

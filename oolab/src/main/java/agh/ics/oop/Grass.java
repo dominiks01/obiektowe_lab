@@ -9,4 +9,9 @@ public class Grass extends IMapElement{
     public String toString(){
         return "*";
     }
+
+    @Override
+    public void positionChanged(Vector2d oldPosition, Vector2d newPosition) {
+
+    }
 }

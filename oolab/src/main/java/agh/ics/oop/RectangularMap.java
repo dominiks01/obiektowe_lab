@@ -4,16 +4,10 @@ import java.util.ArrayList;
 import java.util.List;
 
 public class RectangularMap extends AbstractWorldMap{
-    public int height;
-    public int width;
     private static final Vector2d bottomLeft = new Vector2d(0,0);
     private static Vector2d topRight;
-    private MapVisualizer mv = new MapVisualizer(this);
-
 
     public RectangularMap(int height, int width){
-        super(height, width);
-
         topRight = new Vector2d(width, height);
     }
 
@@ -24,17 +18,16 @@ public class RectangularMap extends AbstractWorldMap{
                 position.precedes(topRight);
     }
 
-    @Override
-    public Object objectAt(Vector2d position) {
-        for(Animal actualAnimal : animals){
-            if(position.equals(actualAnimal.getPosition())){
-                return actualAnimal;
-            }
-        }
-        return null;
+    public Vector2d getBottomLeft(){
+        return bottomLeft;
     }
 
-    public String toString(){
-        return mv.draw(bottomLeft, topRight);
+    public Vector2d getTopRight(){
+        return topRight;
+    }
+
+    @Override
+    public void positionChanged(Vector2d oldPosition, Vector2d newPosition) {
+        return;
     }
 }
