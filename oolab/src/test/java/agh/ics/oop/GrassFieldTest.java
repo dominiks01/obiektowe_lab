@@ -2,18 +2,12 @@ package agh.ics.oop;
 
 import org.junit.jupiter.api.Assertions;
 import org.junit.jupiter.api.Test;
-import org.testng.Assert;
-
-import java.util.List;
-import java.util.Objects;
-
-import static org.junit.jupiter.api.Assertions.assertEquals;
 import static org.junit.jupiter.api.Assertions.assertTrue;
 
 public class GrassFieldTest {
     @Test
     public void mapAnimalsEngine(){
-        IWorldMap map = new GrassField(10);
+        IWorldMap map = new GrassField(3);
 
         Vector2d[] startingPosition = {  new Vector2d(2,9),
                 new Vector2d(2,3),
@@ -47,13 +41,13 @@ public class GrassFieldTest {
         IWorldMap map = new GrassField(10);
 
         Vector2d[] expectedPosition = {
-                new Vector2d(7,9),
-                new Vector2d(7,4)
+                new Vector2d(6,8),
+                new Vector2d(8,5)
         };
 
         Vector2d[] startingPosition = {
-                new Vector2d(5,5),
-                new Vector2d(9,10),
+                new Vector2d(4,4),
+                new Vector2d(10,11),
         };
 
         String[] arguments = {"f", "r", "f", "r", "r", "f", "f", "f", "f", "f", "f", "f","l", "f", "f", "f", "f", "r", "l", "f", "f", "f"};

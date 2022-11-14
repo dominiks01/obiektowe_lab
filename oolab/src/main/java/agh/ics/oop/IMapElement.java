@@ -1,5 +1,7 @@
 package agh.ics.oop;
 
+import java.util.Objects;
+
 abstract public class IMapElement {
     protected Vector2d position;
 
@@ -16,5 +18,10 @@ abstract public class IMapElement {
     }
 
     abstract public String toString();
+
+    @Override
+    public int hashCode() {
+        return Objects.hash(this.getPosition());
+    }
 
 }

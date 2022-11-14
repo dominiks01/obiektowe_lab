@@ -1,7 +1,5 @@
 package agh.ics.oop;
 
-import com.google.common.hash.HashCode;
-
 import java.util.Objects;
 
 public class Vector2d {
@@ -54,10 +52,6 @@ public class Vector2d {
 
     @Override
     public int hashCode() {
-        final int p = 7;
-        int result = p + Integer.hashCode(this.x);
-        int temp;
-        temp = Integer.hashCode(this.y);
-        return p*result + (int)(temp ^ (temp >>>10));
+        return Objects.hash(this.x, this.y);
     }
 }
