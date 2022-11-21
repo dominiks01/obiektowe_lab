@@ -5,9 +5,8 @@ import java.util.List;
 
 public class Animal extends IMapElement {
     private MapDirection orientation;
-    private MapDirection direction = MapDirection.NORTH;
     private final IWorldMap map;
-    private final List<IPositionChangeObserver> observers = new ArrayList<>();
+    public List<IPositionChangeObserver> observers = new ArrayList<>();
 
     public Animal(IWorldMap map, Vector2d initialPosition){
         super(initialPosition);

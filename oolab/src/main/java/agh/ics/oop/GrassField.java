@@ -40,6 +40,8 @@ public class GrassField extends AbstractWorldMap{
             super.objects.remove(objectAt(position));
             super.objects.put(newPosition, new Grass(newPosition));
 
+            return true;
+
         }
         return !isOccupied(position);
     };

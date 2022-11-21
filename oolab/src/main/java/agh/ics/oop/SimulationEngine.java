@@ -29,7 +29,8 @@ public class SimulationEngine implements IEngine{
                     Animal new_a = new Animal(map, start);
                     animals.add(new_a);
                     map.place(new_a);
-                } else if(!checkAnimal((Animal) map.objectAt(start))){
+                }
+                else if(!checkAnimal((Animal) map.objectAt(start))){
                     animals.add((Animal) map.objectAt(start));
                 }
             }
