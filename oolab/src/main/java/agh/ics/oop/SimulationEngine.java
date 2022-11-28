@@ -42,6 +42,7 @@ public class SimulationEngine implements IEngine{
         int i = 0;
         for(MoveDirection mv : this.moves){
             animals.get(i++%(animals.size())).move(mv);
+
         }
     }
 }

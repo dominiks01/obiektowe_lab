@@ -4,8 +4,14 @@ import org.junit.jupiter.api.Assertions;
 import org.junit.jupiter.api.Test;
 
 import static org.junit.jupiter.api.Assertions.assertEquals;
-import static org.junit.jupiter.api.Assertions.assertTrue;
 
+import agh.ics.oop.gui.App;
+import javafx.application.Application;
+
+import javax.swing.*;
+import javax.swing.text.html.Option;
+
+import java.util.Arrays;
 public class GrassFieldTest {
     @Test
     public void mapAnimalsEngine(){
@@ -40,18 +46,11 @@ public class GrassFieldTest {
 
         System.out.println(map.toString());
 
-//        Assertions.assertAll(    ()-> assertTrue(map.objectAt(expectedPosition[0]) instanceof Animal && ((IMapElement)map.objectAt(expectedPosition[0])).getPosition().equals(expectedPosition[0])),
-//                ()-> assertTrue(map.objectAt(expectedPosition[1]) instanceof Animal && ((IMapElement)map.objectAt(expectedPosition[1])).getPosition().equals(expectedPosition[1])),
-//                ()-> assertTrue(map.objectAt(expectedPosition[2]) instanceof Animal && ((IMapElement)map.objectAt(expectedPosition[2])).getPosition().equals(expectedPosition[2])),
-//                ()-> assertTrue(map.objectAt(expectedPosition[3]) instanceof Animal && ((IMapElement)map.objectAt(expectedPosition[3])).getPosition().equals(expectedPosition[3]))
-//
-//        );
-
                 Assertions.assertAll(    ()-> assertEquals(map.objectAt(expectedPosition[0]), animals[0]),
                         ()-> assertEquals(map.objectAt(expectedPosition[1]), animals[1]),
                         ()-> assertEquals(map.objectAt(expectedPosition[2]), animals[2]),
                         ()-> assertEquals(map.objectAt(expectedPosition[3]), animals[3])
-        );
+                );
 
     }
 
@@ -86,10 +85,6 @@ public class GrassFieldTest {
         testEngine.run();
 
         System.out.println(map.toString());
-
-//       Assertions.assertAll(    ()-> assertTrue(map.objectAt(expectedPosition[0]) instanceof Animal && ((IMapElement)map.objectAt(expectedPosition[0])).getPosition().equals(expectedPosition[0])),
-//               ()-> assertTrue(map.objectAt(expectedPosition[1]) instanceof Animal && ((IMapElement)map.objectAt(expectedPosition[1])).getPosition().equals(expectedPosition[1]))
-//       );
 
         Assertions.assertAll(    ()-> assertEquals(map.objectAt(expectedPosition[0]), animals[0]),
                 ()-> assertEquals(map.objectAt(expectedPosition[1]), animals[1]));

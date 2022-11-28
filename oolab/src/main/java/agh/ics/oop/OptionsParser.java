@@ -8,12 +8,19 @@ public class OptionsParser {
         int i = 0;
 
         for(String argument: stringToDirection){
-            switch (argument){
-                case "f", "forward" -> resultArray[i++] = MoveDirection.FORWARD;
-                case "b", "backward" -> resultArray[i++] = MoveDirection.BACKWARD;
-                case "l", "left" -> resultArray[i++] = MoveDirection.LEFT;
-                case "r", "right" -> resultArray[i++] = MoveDirection.RIGHT;
+             MoveDirection move =  switch (argument){
+                case "f", "forward" -> MoveDirection.FORWARD;
+                case "b", "backward" -> MoveDirection.BACKWARD;
+                case "l", "left" -> MoveDirection.LEFT;
+                case "r", "right" ->  MoveDirection.RIGHT;
+                 default -> null;
+            };
+            if(move == null)  throw new IllegalArgumentException("Argument " + argument + " is not legal move specification");
+            else {
+                resultArray[i] = move;
+                i += 1;
             }
+
         }
         return Arrays.copyOfRange(resultArray, 0, i);
     }

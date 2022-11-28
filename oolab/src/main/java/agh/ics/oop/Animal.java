@@ -6,7 +6,6 @@ import java.util.List;
 public class Animal extends IMapElement {
     private MapDirection orientation;
     private final IWorldMap map;
-    public List<IPositionChangeObserver> observers = new ArrayList<>();
 
     public Animal(IWorldMap map, Vector2d initialPosition){
         super(initialPosition);
@@ -18,13 +17,6 @@ public class Animal extends IMapElement {
         this(map, new Vector2d(2,2));
     }
 
-    public void addObserver(IPositionChangeObserver observer) {
-        this.observers.add(observer);
-    }
-
-    public void removeObserver(IPositionChangeObserver observer) {
-        this.observers.remove(observer);
-    }
 
     public String toString(){
         return switch (this.orientation){
@@ -49,18 +41,13 @@ public class Animal extends IMapElement {
                         newPosition.add(this.orientation.toUnitVector()):
                         newPosition.subtract(this.orientation.toUnitVector());
             }
-            this.positionChanged(super.position, newPosition);
+            notifyObservers(super.position, newPosition);
             super.position = newPosition;
         } else {
             this.orientation = (direction.equals(MoveDirection.LEFT))?
                     this.orientation.previous():
                     this.orientation.next();
         }
-    }
-
-    public void positionChanged(Vector2d oldPosition, Vector2d newPosition){
-        for (IPositionChangeObserver observer : this.observers)
-            observer.positionChanged(oldPosition, newPosition);
     }
 
 }

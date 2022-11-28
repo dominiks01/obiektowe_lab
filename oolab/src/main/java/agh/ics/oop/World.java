@@ -1,15 +1,24 @@
+
 package agh.ics.oop;
+
+import agh.ics.oop.gui.App;
+import javafx.application.Application;
+
+import javax.swing.*;
+import javax.swing.text.html.Option;
+
 import java.util.Arrays;
 
+import static agh.ics.oop.Directions.*;
+import static java.lang.System.exit;
 public class World {
     public static void main(String[] args){
-        MoveDirection[] directions = new OptionsParser().parse(args);
-        IWorldMap map = new GrassField(10);
-        Vector2d[] positions = { new Vector2d(2,2), new Vector2d(3,4) };
-        IEngine engine = new SimulationEngine(directions, map, positions);
-        engine.run();
-
-        System.out.println(map.toString());
+        try {
+            Application.launch(App.class, args);
+        } catch (IllegalArgumentException ex) {
+            System.out.println(ex);
+            exit(0);
+        }
     }
 
     public static Directions[] string_to_enum(String[]args){

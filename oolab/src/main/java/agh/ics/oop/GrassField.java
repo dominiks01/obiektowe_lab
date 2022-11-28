@@ -1,17 +1,18 @@
 package agh.ics.oop;
 
+import java.util.ArrayList;
+import java.util.List;
 import java.util.Random;
 
 public class GrassField extends AbstractWorldMap{
 
     int numberOfGrasses;
-
     private Vector2d getRandomVector(int n){
         return new Vector2d((int)(Math.random()*(Math.sqrt(10*n)+1)),
                 (int)(Math.random()*(Math.sqrt(10*n)+1)));
     }
 
-    GrassField(int numberOfGrasses){
+    public GrassField(int numberOfGrasses){
         this.numberOfGrasses = numberOfGrasses;
         Random random = new Random();
 
@@ -23,7 +24,12 @@ public class GrassField extends AbstractWorldMap{
                newPosition = getRandomVector(numberOfGrasses+1);
             }
 
-            super.objects.put(newPosition, new Grass(newPosition));
+            Grass newGrass = new Grass(newPosition);
+            newGrass.addObserver(this);
+            newGrass.addObserver(this.getBoundary());
+            super.positionChanged(null, newPosition);
+            super.objects.put(newPosition, newGrass);
+            boundary.addPosition(newPosition);
         }
     }
 
@@ -37,14 +43,20 @@ public class GrassField extends AbstractWorldMap{
                 newPosition = getRandomVector(numberOfGrasses+1);
             }
 
-            super.objects.remove(objectAt(position));
-            super.objects.put(newPosition, new Grass(newPosition));
+            System.out.println(newPosition + "XDD^XDD");
+
+
+            Grass newGrass = new Grass(newPosition);
+            newGrass.addObserver(this.getBoundary());
+            super.positionChanged(position, newPosition);
+            super.objects.put(null, newGrass);
+            boundary.addPosition(newPosition);
 
             return true;
-
         }
-        return !isOccupied(position);
+        return (!isOccupied(position));
     };
+
 
 
     public Vector2d getBottomLeft(){
