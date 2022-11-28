@@ -4,7 +4,7 @@ import java.util.Comparator;
 import java.util.TreeSet;
 
 public class MapBoundary implements IPositionChangeObserver {
-    TreeSet<Vector2d> horizontal = new TreeSet<Vector2d>(new Comparator<Vector2d>() {
+    private TreeSet<Vector2d> horizontal = new TreeSet<Vector2d>(new Comparator<Vector2d>() {
         @Override
         public int compare(Vector2d i1, Vector2d i2) {
             if(i1.x == i2.x){
@@ -14,7 +14,7 @@ public class MapBoundary implements IPositionChangeObserver {
         }
     });
 
-    TreeSet<Vector2d> vertical = new TreeSet<Vector2d>(new Comparator<Vector2d>() {
+    private TreeSet<Vector2d> vertical = new TreeSet<Vector2d>(new Comparator<Vector2d>() {
         @Override
         public int compare(Vector2d i1, Vector2d i2){
             if(i1.y == i2.y){
@@ -24,7 +24,7 @@ public class MapBoundary implements IPositionChangeObserver {
         }
     });
     public void positionChanged(Vector2d oldPosition, Vector2d newPosition) {
-        System.out.println(oldPosition + " " + newPosition);
+//        System.out.println(oldPosition + " " + newPosition);
             this.horizontal.remove(oldPosition);
             this.horizontal.add(newPosition);
             this.vertical.remove(oldPosition);

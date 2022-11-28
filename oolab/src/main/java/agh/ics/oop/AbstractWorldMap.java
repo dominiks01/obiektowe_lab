@@ -9,27 +9,31 @@ public abstract class AbstractWorldMap implements IWorldMap, IPositionChangeObse
     private final MapVisualizer mv = new MapVisualizer(this);
     protected Map<Vector2d, IMapElement> objects = new HashMap<>();
 //    protected List<IPositionChangeObserver> observers = new ArrayList<>();
-    public MapBoundary boundary = new MapBoundary();
 
     @Override
     public boolean isOccupied(Vector2d position) {
         return (objectAt(position)!=null);
     }
 
-    public MapBoundary getBoundary() {
-        return this.boundary;
-    }
-    @Override
-    public boolean place(Animal animal) {
-        if (!(objects.get(animal.getPosition()) instanceof Animal))
-        {
-            objects.put(animal.getPosition(), animal);
-            animal.addObserver(this);
-            animal.addObserver(this.getBoundary());
-            return true;
-        }
-        throw new IllegalArgumentException();
-    }
+//    public MapBoundary boundary = new MapBoundary();
+//
+//    public MapBoundary getBoundary() {
+//        return this.boundary;
+//    }
+//    @Override
+//    public boolean place(Animal animal) {
+//        if (!(objects.get(animal.getPosition()) instanceof Animal))
+//        {
+//            objects.put(animal.getPosition(), animal);
+//            animal.addObserver(this);
+//            animal.addObserver(this.getBoundary());
+//            return true;
+//        }
+//        throw new IllegalArgumentException();
+//    }
+
+    //public abstract boolean place(Animal animal);
+
     public String toString(){
         return mv.draw(getBottomLeft(), getTopRight());
     }

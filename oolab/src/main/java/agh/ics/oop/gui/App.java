@@ -8,10 +8,7 @@ import javafx.scene.control.Label;
 import javafx.scene.layout.ColumnConstraints;
 import javafx.scene.layout.GridPane;
 import javafx.scene.layout.RowConstraints;
-import javafx.scene.text.Font;
 import javafx.stage.Stage;
-
-import java.sql.Array;
 
 public class App extends Application {
 
@@ -30,15 +27,13 @@ public class App extends Application {
             System.out.println(e.getMessage());
         }
     }
-
-
     @Override
     public void start(Stage primaryStage){
         GridPane grid = new GridPane();
-        int xAxis = map.getBoundary().getLeftBottom().x;
-        int yAxis = map.getBoundary().getLeftBottom().y;
-        int xAxisDiff = map.getBoundary().getTopRight().x - xAxis + 2;
-        int yAsixDiff = map.getBoundary().getTopRight().y - yAxis + 2;
+        int xAxis = map.getBottomLeft().x;
+        int yAxis = map.getBottomLeft().y;
+        int xAxisDiff = map.getTopRight().x - xAxis + 2;
+        int yAsixDiff = map.getTopRight().y - yAxis + 2;
 
 
         for(int i = 0; i < xAxisDiff; i++) {
@@ -59,8 +54,8 @@ public class App extends Application {
 
         }
 
-        grid.getColumnConstraints().add(new ColumnConstraints(50));
-        grid.getRowConstraints().add(new RowConstraints(50));
+//        grid.getColumnConstraints().add(new ColumnConstraints(50));
+//        grid.getRowConstraints().add(new RowConstraints(50));
 
         for(int y = 0; y < yAsixDiff; y++) {
             for(int x = 0; x < xAxisDiff; x++) {

@@ -4,56 +4,130 @@ import org.junit.jupiter.api.Assertions;
 import org.junit.jupiter.api.Test;
 
 import static org.junit.jupiter.api.Assertions.assertEquals;
+import static org.junit.jupiter.api.Assertions.assertThrows;
 
 import agh.ics.oop.gui.App;
 import javafx.application.Application;
+import org.junit.jupiter.api.TestFactory;
 
 import javax.swing.*;
 import javax.swing.text.html.Option;
 
 import java.util.Arrays;
 public class GrassFieldTest {
-    @Test
-    public void mapAnimalsEngine(){
-        IWorldMap map = new GrassField(5);
+//    @Test
+//    public void mapAnimalsEngine(){
+//        IWorldMap map = new GrassField(5);
+//
+//        Vector2d[] startingPosition = {  new Vector2d(2,9),
+//                new Vector2d(2,3),
+//                new Vector2d(8,9),
+//                new Vector2d(5,6)};
+//
+//        Animal[] animals = {
+//                new Animal(map, startingPosition[0]),
+//                new Animal(map, startingPosition[1]),
+//                new Animal(map, startingPosition[2]),
+//                new Animal(map, startingPosition[3])};
+//
+//        Vector2d[] expectedPosition = {  new Vector2d(2,6),
+//                new Vector2d(4,5),
+//                new Vector2d(8,4),
+//                new Vector2d(12,6)};
+//
+//        String[] arguments = {"r", "r", "r", "r", "f", "f", "r", "f", "r", "l", "f", "f", "f", "f", "f", "f", "f", "f",
+//                "f", "f", "f", "f", "f", "f", "r", "r", "f", "f", "f", "f", "f", "f"};
+//        MoveDirection[] directions = new OptionsParser().parse(arguments);
+//
+//        IEngine testEngine = new SimulationEngine(directions, map, startingPosition);
+//        testEngine.run();
+//
+//                Assertions.assertAll(    ()-> assertEquals(map.objectAt(expectedPosition[0]), animals[0]),
+//                        ()-> assertEquals(map.objectAt(expectedPosition[1]), animals[1]),
+//                        ()-> assertEquals(map.objectAt(expectedPosition[2]), animals[2]),
+//                        ()-> assertEquals(map.objectAt(expectedPosition[3]), animals[3])
+//                );
+//
+//    }
+//
+//
+//    @Test
+//    public void mapAnimalsEngineSecondTest(){
+//        IWorldMap map = new GrassField(10);
+//
+//        Vector2d[] expectedPosition = {
+//                new Vector2d(6,8),
+//                new Vector2d(8,5)
+//        };
+//
+//        Vector2d[] startingPosition = {
+//                new Vector2d(4,4),
+//                new Vector2d(10,11),
+//        };
+//
+//        Animal[] animals = {
+//                new Animal(map, startingPosition[0]),
+//                new Animal(map, startingPosition[1])
+//        };
+//
+//        String[] arguments = {"f", "r", "f", "r", "r", "f", "f", "f", "f", "f", "f", "f","l", "f", "f", "f", "f", "r", "l", "f", "f", "f"};
+//        MoveDirection[] directions = new OptionsParser().parse(arguments);
+//
+//
+//        IEngine testEngine = new SimulationEngine(directions, map, startingPosition);
+//        testEngine.run();
+//
+//        Assertions.assertAll(    ()-> assertEquals(map.objectAt(expectedPosition[0]), animals[0]),
+//                ()-> assertEquals(map.objectAt(expectedPosition[1]), animals[1]));
+//
+//    }
 
-        Vector2d[] startingPosition = {  new Vector2d(2,9),
-                new Vector2d(2,3),
-                new Vector2d(8,9),
-                new Vector2d(5,6)};
+    @Test
+    public void parserTest(){
+        String[] arguments = {"foo", "r", "f", "r", "r", "f", "f", "f", "f", "f", "f", "f","l", "f", "f", "f", "f", "r", "l", "f", "f", "f"};
+        assertThrows(IllegalArgumentException.class, ()->new OptionsParser().parse(arguments));
+    }
+
+    @Test
+    public void parserTest2(){
+        String[] arguments = {"foo", "r", "f", "r", "f", "io", "f"};
+        assertThrows(IllegalArgumentException.class, ()->new OptionsParser().parse(arguments));
+    }
+
+    @Test
+    public void parserTest3(){
+        String[] arguments = {"fo"};
+        assertThrows(IllegalArgumentException.class, ()->new OptionsParser().parse(arguments));
+    }
+
+    @Test
+    public void mapAnimalsEngineSecondTestFail(){
+        IWorldMap map = new GrassField(10);
+
+        Vector2d[] expectedPosition = {
+                new Vector2d(6,8),
+                new Vector2d(8,5)
+        };
+
+        Vector2d[] startingPosition = {
+                new Vector2d(4,4),
+                new Vector2d(10,11),
+        };
 
         Animal[] animals = {
                 new Animal(map, startingPosition[0]),
-                new Animal(map, startingPosition[1]),
-                new Animal(map, startingPosition[2]),
-                new Animal(map, startingPosition[3])};
+                new Animal(map, startingPosition[1])
+        };
 
-        Vector2d[] expectedPosition = {  new Vector2d(2,6),
-                new Vector2d(4,5),
-                new Vector2d(8,4),
-                new Vector2d(12,6)};
-
-        String[] arguments = {"r", "r", "r", "r", "f", "f", "r", "f", "r", "l", "f", "f", "f", "f", "f", "f", "f", "f",
-                "f", "f", "f", "f", "f", "f", "r", "r", "f", "f", "f", "f", "f", "f"};
+        String[] arguments = {"f", "r", "f", "r", "r", "f", "f", "f", "f", "f", "f", "f","l", "f", "f", "f", "f", "r", "l", "f", "f", "f"};
         MoveDirection[] directions = new OptionsParser().parse(arguments);
 
         for(Animal i : animals){
             map.place(i);
         }
 
-        IEngine testEngine = new SimulationEngine(directions, map, startingPosition);
-        testEngine.run();
-
-        System.out.println(map.toString());
-
-                Assertions.assertAll(    ()-> assertEquals(map.objectAt(expectedPosition[0]), animals[0]),
-                        ()-> assertEquals(map.objectAt(expectedPosition[1]), animals[1]),
-                        ()-> assertEquals(map.objectAt(expectedPosition[2]), animals[2]),
-                        ()-> assertEquals(map.objectAt(expectedPosition[3]), animals[3])
-                );
-
-    }
-
+        assertThrows(IllegalArgumentException.class, ()->new SimulationEngine(directions, map, startingPosition));
+}
 
     @Test
     public void mapAnimalsEngineSecondTest(){
@@ -81,12 +155,6 @@ public class GrassFieldTest {
             map.place(i);
         }
 
-        IEngine testEngine = new SimulationEngine(directions, map, startingPosition);
-        testEngine.run();
-
-        System.out.println(map.toString());
-
-        Assertions.assertAll(    ()-> assertEquals(map.objectAt(expectedPosition[0]), animals[0]),
-                ()-> assertEquals(map.objectAt(expectedPosition[1]), animals[1]));
-
-    }};
+        assertThrows(IllegalArgumentException.class, ()->new SimulationEngine(directions, map, startingPosition));
+    }
+}

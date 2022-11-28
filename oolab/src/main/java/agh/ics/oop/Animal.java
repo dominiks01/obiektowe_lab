@@ -36,6 +36,9 @@ public class Animal extends IMapElement {
 
             Vector2d newPosition = super.position;
 
+//            System.out.println(this.getPosition());
+//            System.out.println(map.canMoveTo(newPosition.add(this.orientation.toUnitVector())));
+
             if(map.canMoveTo(newPosition.add(this.orientation.toUnitVector()))){
                 newPosition = (direction.equals(MoveDirection.FORWARD))?
                         newPosition.add(this.orientation.toUnitVector()):

@@ -10,7 +10,6 @@ public class SimulationEngine implements IEngine{
     private IWorldMap map;
 
     private boolean checkAnimal(Animal checkAnimal){
-
         for(Animal i: animals){
             if(i.equals(checkAnimal)){
                 return true;
@@ -25,14 +24,9 @@ public class SimulationEngine implements IEngine{
 
         if(startingPositions != null) {
             for (Vector2d start : startingPositions) {
-                if(map.canMoveTo(start)) {
                     Animal new_a = new Animal(map, start);
                     animals.add(new_a);
                     map.place(new_a);
-                }
-                else if(!checkAnimal((Animal) map.objectAt(start))){
-                    animals.add((Animal) map.objectAt(start));
-                }
             }
         }
     }

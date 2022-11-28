@@ -1,10 +1,25 @@
 package agh.ics.oop;
 
-import java.util.ArrayList;
-import java.util.List;
 import java.util.Random;
 
 public class GrassField extends AbstractWorldMap{
+    private MapBoundary boundary = new MapBoundary();
+
+//    public MapBoundary getBoundary() {
+//        return this.boundary;
+//    }
+
+    @Override
+    public boolean place(Animal animal) {
+        if (!(objects.get(animal.getPosition()) instanceof Animal))
+        {
+            objects.put(animal.getPosition(), animal);
+            animal.addObserver(this);
+            animal.addObserver(boundary);
+            return true;
+        }
+        throw new IllegalArgumentException();
+    }
 
     int numberOfGrasses;
     private Vector2d getRandomVector(int n){
@@ -26,7 +41,7 @@ public class GrassField extends AbstractWorldMap{
 
             Grass newGrass = new Grass(newPosition);
             newGrass.addObserver(this);
-            newGrass.addObserver(this.getBoundary());
+            newGrass.addObserver(boundary);
             super.positionChanged(null, newPosition);
             super.objects.put(newPosition, newGrass);
             boundary.addPosition(newPosition);
@@ -43,13 +58,11 @@ public class GrassField extends AbstractWorldMap{
                 newPosition = getRandomVector(numberOfGrasses+1);
             }
 
-            System.out.println(newPosition + "XDD^XDD");
-
-
             Grass newGrass = new Grass(newPosition);
-            newGrass.addObserver(this.getBoundary());
+            newGrass.addObserver(this);
+            newGrass.addObserver(boundary);
             super.positionChanged(position, newPosition);
-            super.objects.put(null, newGrass);
+            super.objects.put(newPosition, newGrass);
             boundary.addPosition(newPosition);
 
             return true;
@@ -60,23 +73,11 @@ public class GrassField extends AbstractWorldMap{
 
 
     public Vector2d getBottomLeft(){
-        Vector2d bottomLeft = new Vector2d(0,0);
-
-        for(IMapElement i : super.objects.values()){
-            bottomLeft = bottomLeft.lowerLeft(i.getPosition());
-        }
-
-        return bottomLeft;
+        return boundary.getLeftBottom();
     }
 
     public Vector2d getTopRight(){
-        Vector2d topRight = new Vector2d(0,0);
-
-        for(IMapElement i : super.objects.values()){
-            topRight = topRight.upperRight(i.getPosition());
-        }
-
-        return topRight;
+        return boundary.getTopRight();
     }
 
 }

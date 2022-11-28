@@ -12,7 +12,7 @@ import static org.junit.jupiter.api.Assertions.*;
 public class MapTest {
     @Test
     public void mapAnimalsEngine(){
-        IWorldMap map = new RectangularMap(10, 10);
+        IWorldMap map = new RectangularMap(12, 12);
 
         Vector2d[] startingPosition = {  new Vector2d(2,9),
                 new Vector2d(2,3),
@@ -22,7 +22,7 @@ public class MapTest {
         Vector2d[] expectedPosition = {  new Vector2d(2,6),
                 new Vector2d(4,5),
                 new Vector2d(8,4),
-                new Vector2d(10,6)};
+                new Vector2d(11,6)};
 
         String[] arguments = {"r", "r", "r", "r", "f", "f", "r", "f", "r", "l", "f", "f", "f", "f", "f", "f", "f", "f",
                 "f", "f", "f", "f", "f", "f", "r", "r", "f", "f", "f", "f", "f", "f"};
@@ -37,7 +37,6 @@ public class MapTest {
                 ()-> assertTrue(map.objectAt(expectedPosition[1]) instanceof Animal && ((IMapElement)map.objectAt(expectedPosition[1])).getPosition().equals(expectedPosition[1])),
                 ()-> assertTrue(map.objectAt(expectedPosition[2]) instanceof Animal && ((IMapElement)map.objectAt(expectedPosition[2])).getPosition().equals(expectedPosition[2])),
                 ()-> assertTrue(map.objectAt(expectedPosition[3]) instanceof Animal && ((IMapElement)map.objectAt(expectedPosition[3])).getPosition().equals(expectedPosition[3]))
-
                 );
     }
 

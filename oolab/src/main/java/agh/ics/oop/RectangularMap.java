@@ -11,6 +11,31 @@ public class RectangularMap extends AbstractWorldMap{
         topRight = new Vector2d(width, height);
     }
 
+    //public MapBoundary boundary = new MapBoundary();
+
+    @Override
+    public boolean place(Animal animal) {
+        System.out.println(animal.getPosition());
+        System.out.println(canMoveTo(animal.getPosition()));
+        if(canMoveTo(animal.getPosition())){
+            objects.put(animal.getPosition(), animal);
+            animal.addObserver(this);
+            return true;
+        }
+        else throw new IllegalArgumentException();
+    }
+
+//    @Override
+//    public boolean place(Animal animal) {
+//    if (!(objects.get(animal.getPosition()) instanceof Animal))
+//    {
+//        objects.put(animal.getPosition(), animal);
+//        animal.addObserver(this);
+//        return true;
+//    }
+//        throw new IllegalArgumentException();
+//}
+
     @Override
     public boolean canMoveTo(Vector2d position) {
         return !isOccupied(position) &&
