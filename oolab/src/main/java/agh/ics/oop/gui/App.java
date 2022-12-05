@@ -18,7 +18,9 @@ public class App extends Application implements IMapChangeObserver{
     AbstractWorldMap map;
     GridPane grid = new GridPane();
 
-    private ResetSimulationEngine engine;
+    VBox vbox;
+
+    private agh.ics.oop.gui.SimulationEngine engine;
 
     int xAxis;
     int yAxis;
@@ -72,12 +74,11 @@ public class App extends Application implements IMapChangeObserver{
     }
 
     @Override
-    public void reset() {
+    public void notifyObservers() {
         Platform.runLater( ()-> {
             this.grid.getChildren().clear();
             this.grid.getRowConstraints().clear();
             this.grid.getColumnConstraints().clear();
-            this.grid.setGridLinesVisible(false);
             try {
                 drawElements();
             } catch (FileNotFoundException e) {
@@ -91,13 +92,13 @@ public class App extends Application implements IMapChangeObserver{
     public void start(Stage primaryStage) throws FileNotFoundException {
         map = new GrassField(5);
         Vector2d[] positions = { new Vector2d(2,2), new Vector2d(3,3)};
-        engine = new ResetSimulationEngine(this.map, positions);
+        engine = new agh.ics.oop.gui.SimulationEngine(this.map, positions);
         engine.addObserver(this);
 
         TextField inputField = new TextField();
         Button button = new Button("Podaj kierunek");
         HBox hbox = new HBox(button, inputField);
-        VBox vbox = new VBox(hbox, this.grid);
+        vbox = new VBox(hbox, this.grid);
         hbox.setAlignment(Pos.CENTER);
 
         xAxis = map.getBottomLeft().x;
@@ -112,7 +113,7 @@ public class App extends Application implements IMapChangeObserver{
             engineThread.start();
         });
 
-        Scene scene = new Scene(vbox, 50*xAxisDiff+50, 50*yAsixDiff+50);
+        Scene scene = new Scene(vbox, 50*xAxisDiff, 50*yAsixDiff+30);
         drawElements();
 
         primaryStage.setScene(scene);

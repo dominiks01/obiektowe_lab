@@ -126,7 +126,7 @@ public class GrassFieldTest {
             map.place(i);
         }
 
-        assertThrows(IllegalArgumentException.class, ()->new SimulationEngine(directions, map, startingPosition));
+//        assertThrows(IllegalArgumentException.class, ()->new SimulationEngine(directions, map, startingPosition));
 }
 
     @Test
@@ -155,6 +155,6 @@ public class GrassFieldTest {
             map.place(i);
         }
 
-        assertThrows(IllegalArgumentException.class, ()->new SimulationEngine(directions, map, startingPosition));
+//        assertThrows(IllegalArgumentException.class, ()->new SimulationEngine(directions, map, startingPosition));
     }
 }

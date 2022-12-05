@@ -1,8 +1,5 @@
 package agh.ics.oop;
 
-import java.util.ArrayList;
-import java.util.List;
-
 public class Animal extends IMapElement {
     private MapDirection orientation;
     private final IWorldMap map;

@@ -28,8 +28,8 @@ public class MapTest {
                 "f", "f", "f", "f", "f", "f", "r", "r", "f", "f", "f", "f", "f", "f"};
         MoveDirection[] directions = new OptionsParser().parse(arguments);
 
-        IEngine testEngine = new SimulationEngine(directions, map, startingPosition);
-        testEngine.run();
+//        IEngine testEngine = new SimulationEngine(directions, map, startingPosition);
+//        testEngine.run();
 
         System.out.println(map.toString());
 
@@ -64,8 +64,8 @@ public class MapTest {
                 map.place(i);
             }
 
-            IEngine testEngine = new SimulationEngine(directions, map, startingPosition);
-            testEngine.run();
+//            IEngine testEngine = new SimulationEngine(directions, map, startingPosition);
+//            testEngine.run();
 
             System.out.println(map.toString());
 

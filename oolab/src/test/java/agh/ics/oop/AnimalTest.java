@@ -31,8 +31,8 @@ public class AnimalTest {
        for(Animal animal: animals)
            map.place(animal);
 
-       IEngine testEngine = new SimulationEngine(directions, map, null);
-       testEngine.run();
+//       IEngine testEngine = new SimulationEngine(directions, map, null);
+//       testEngine.run();
 
        Assertions.assertAll(    ()-> assertEquals(animals[0], map.objectAt(expectedPosition[0])),
                                 ()-> assertEquals(animals[1], map.objectAt(expectedPosition[1])),

@@ -3,7 +3,7 @@ package agh.ics.oop;
 import java.util.Random;
 
 public class GrassField extends AbstractWorldMap{
-    private MapBoundary boundary = new MapBoundary();
+    private final MapBoundary boundary = new MapBoundary();
 
     @Override
     public boolean place(Animal animal) {
@@ -61,9 +61,6 @@ public class GrassField extends AbstractWorldMap{
             super.objects.put(newPosition, newGrass);
             boundary.addPosition(newPosition);
 
-//            Grass newGrass = new Grass(newPosition);
-//            super.positionChanged(position, newPosition);
-//            boundary.positionChanged(position, newPosition);
 
             return true;
         }

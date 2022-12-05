@@ -1,5 +1,5 @@
 package agh.ics.oop.gui;
 
 public interface IMapChangeObserver {
-    void reset();
+    void notifyObservers();
 }
