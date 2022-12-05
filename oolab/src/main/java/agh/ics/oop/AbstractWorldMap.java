@@ -15,25 +15,6 @@ public abstract class AbstractWorldMap implements IWorldMap, IPositionChangeObse
         return (objectAt(position)!=null);
     }
 
-//    public MapBoundary boundary = new MapBoundary();
-//
-//    public MapBoundary getBoundary() {
-//        return this.boundary;
-//    }
-//    @Override
-//    public boolean place(Animal animal) {
-//        if (!(objects.get(animal.getPosition()) instanceof Animal))
-//        {
-//            objects.put(animal.getPosition(), animal);
-//            animal.addObserver(this);
-//            animal.addObserver(this.getBoundary());
-//            return true;
-//        }
-//        throw new IllegalArgumentException();
-//    }
-
-    //public abstract boolean place(Animal animal);
-
     public String toString(){
         return mv.draw(getBottomLeft(), getTopRight());
     }
@@ -54,6 +35,6 @@ public abstract class AbstractWorldMap implements IWorldMap, IPositionChangeObse
         IMapElement animal = this.objects.get(oldPosition);
         this.objects.remove(oldPosition);
         this.objects.put(newPosition, animal);
-
     }
+
 }

@@ -24,9 +24,9 @@ public class MapBoundary implements IPositionChangeObserver {
         }
     });
     public void positionChanged(Vector2d oldPosition, Vector2d newPosition) {
-//        System.out.println(oldPosition + " " + newPosition);
             this.horizontal.remove(oldPosition);
             this.horizontal.add(newPosition);
+
             this.vertical.remove(oldPosition);
             this.vertical.add(newPosition);
     }

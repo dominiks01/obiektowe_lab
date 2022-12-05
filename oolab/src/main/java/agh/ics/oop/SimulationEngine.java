@@ -7,6 +7,9 @@ public class SimulationEngine implements IEngine{
     private final List<Animal> animals = new ArrayList<>();
     private final MoveDirection[] moves;
 
+    private final List<IPositionChangeObserver> animalMoveObservers = new ArrayList<>();
+    private final int moveDelay = 300;
+
     private IWorldMap map;
 
     private boolean checkAnimal(Animal checkAnimal){
@@ -31,12 +34,17 @@ public class SimulationEngine implements IEngine{
         }
     }
 
+
+
     @Override
-    public void run() {
+    public void run() throws InterruptedException {
         int i = 0;
         for(MoveDirection mv : this.moves){
             animals.get(i++%(animals.size())).move(mv);
-
         }
+    }
+
+    public void addAnimalMoveObserver(IPositionChangeObserver animalMoveObserver) {
+        this.animalMoveObservers.add(animalMoveObserver);
     }
 }

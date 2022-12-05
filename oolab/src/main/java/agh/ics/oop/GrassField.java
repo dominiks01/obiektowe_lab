@@ -5,10 +5,6 @@ import java.util.Random;
 public class GrassField extends AbstractWorldMap{
     private MapBoundary boundary = new MapBoundary();
 
-//    public MapBoundary getBoundary() {
-//        return this.boundary;
-//    }
-
     @Override
     public boolean place(Animal animal) {
         if (!(objects.get(animal.getPosition()) instanceof Animal))
@@ -65,12 +61,14 @@ public class GrassField extends AbstractWorldMap{
             super.objects.put(newPosition, newGrass);
             boundary.addPosition(newPosition);
 
+//            Grass newGrass = new Grass(newPosition);
+//            super.positionChanged(position, newPosition);
+//            boundary.positionChanged(position, newPosition);
+
             return true;
         }
         return (!isOccupied(position));
     };
-
-
 
     public Vector2d getBottomLeft(){
         return boundary.getLeftBottom();
@@ -79,5 +77,6 @@ public class GrassField extends AbstractWorldMap{
     public Vector2d getTopRight(){
         return boundary.getTopRight();
     }
+
 
 }

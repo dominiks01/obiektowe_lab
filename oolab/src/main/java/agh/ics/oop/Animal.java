@@ -31,13 +31,10 @@ public class Animal extends IMapElement {
         return this.orientation;
     }
 
-    public void move(MoveDirection direction){
+    public void move(MoveDirection direction) throws InterruptedException {
         if(direction.equals(MoveDirection.FORWARD) || direction.equals(MoveDirection.BACKWARD)){
 
             Vector2d newPosition = super.position;
-
-//            System.out.println(this.getPosition());
-//            System.out.println(map.canMoveTo(newPosition.add(this.orientation.toUnitVector())));
 
             if(map.canMoveTo(newPosition.add(this.orientation.toUnitVector()))){
                 newPosition = (direction.equals(MoveDirection.FORWARD))?
@@ -51,6 +48,7 @@ public class Animal extends IMapElement {
                     this.orientation.previous():
                     this.orientation.next();
         }
+
     }
 
 }
